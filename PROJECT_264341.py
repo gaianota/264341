@@ -28,8 +28,8 @@ for col in X.columns:
   plt.show()
 #We can see that there is no linear correlation between the regressor and response variables!
 
-for columns correlation
-  upper_tri = corr.where(np.triu(np.ones(corr.shape), k=1).astype(np.bool_))
+
+upper_tri = corr.where(np.triu(np.ones(corr.shape), k=1).astype(np.bool_))
 
 to_drop = list([column for column in upper_tri.columns if any(upper_tri[column] > 0.95)])
 
@@ -52,7 +52,6 @@ print('New:', new_sms.shape)
 #Generate a training and test set. The test set should be used only at the end.
 #Splitting
 from sklearn.model_selection import train_test_split
-
 X_train, X_rem, y_train, y_rem = train_test_split(X, y, train_size=0.8, random_state=42)
 X_valid, X_test, y_valid, y_test = train_test_split(X_rem, y_rem, test_size=0.2, random_state=42)
 print("X:train shape: ", X_train.shape)
