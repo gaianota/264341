@@ -110,8 +110,38 @@ print(mean_absolute_error(y_valid, y_pred))
 #esplor the parameters to find the best combination
 #Cross validation for Random Forest
 from sklearn.model_selection import GridSearchCV
-grid ={'criterion':{“squared_error”, “absolute_error”,“poisson”}, 'splitter':['random','best']}
-clf_grid = GridSearchCV(regressor, grid, cv= 4, scoring='accuracy')
-clf_grid.fit(X_train, y_train)
-clf_grid.best_params_
+grid ={'criterion':[“squared_error”,“absolute_error”,“poisson”],'max_features':[“sqrt”,“log2”, None], 'max_depth': range(3, 7),'n_estimators': (10, 50, 100, 1000)}
+rfr_grid = GridSearchCV(estimator, grid,cv=5, scoring='neg_mean_squared_error', verbose=0, n_jobs=-1)
+grid_result = rfr_grid.fit(X_train, y_train)
+best_params = grid_result.best_params_
 
+rfr = RandomForestRegressor(criterion=best_params['criterion'],max_features = best_params['max_features'],max_depth=best_params["max_depth"], n_estimators=best_params["n_estimators"],random_state=False, verbose=False)
+def rfr_model(X, y):
+  # Perform Grid-Search
+  gsc = GridSearchCV(
+    estimator=RandomForestRegressor(),
+    param_grid={
+      'max_depth': range(3, 7),
+      'n_estimators': (10, 50, 100, 1000),
+    },
+    cv=5, scoring='neg_mean_squared_error', verbose=0, n_jobs=-1)
+
+  grid_result = gsc.fit(X, y)
+  best_params = grid_result.best_params_
+
+  rfr = RandomForestRegressor(max_depth=best_params["max_depth"], n_estimators=best_params["n_estimators"],
+                              random_state=False, verbose=False)
+  # Perform K-Fold CV
+  def best_scores_grid_search_df(reg):
+    reg.cv_results_
+    grid_table = pd.DataFrame(reg.cv_results_)
+    colums_wanted = ['params', 'mean_test_score', 'std_test_score', 'rank_test_score']
+    grid_table_rank = grid_table[colums_wanted].sort_values(by='rank_test_score', ascending=True)
+    return grid_table_rank
+
+
+print(best_scores_grid_search_df(clf_grid))
+
+scores = cross_val_score(rfr, X, y, cv=10, scoring='neg_mean_absolute_error')
+
+return scores
