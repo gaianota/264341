@@ -1,0 +1,45 @@
+#cleaning of outliers
+
+columns =  ['tokens_content','unique_tokens','hrefs','self_refs', 'imgs', 'videos','kw_min_min', 'kw_max_min', 'kw_avg_min', 'kw_min_max', 'kw_max_max', 'kw_avg_max', 'kw_min_avg', 'kw_max_avg', 'kw_avg_avg', 'self_reference_min_shares', 'self_reference_max_shares', 'self_reference_avg_shares']
+
+for col in columns:
+    for x in [col]:
+        q75,q25 = np.percentile(X.loc[:,x],[90,10])
+        intr_qr = q75-q25
+        max = q75+(1.5*intr_qr)
+        min = q25-(1.5*intr_qr)
+        X.loc[X[x] < min,x] = np.nan
+        X.loc[X[x] > max,x] = np.nan
+
+#wetransform outliers in null values
+
+print(X.info())
+print(X.isnull().sum())
+new_sms= X.assign(shares = y)
+new_sms = new_sms.dropna(axis=0)
+print(new_sms.info())
+X = new_sms.iloc[:,:-1]
+y = new_sms.iloc[:,-1]
+
+
+print('New:' ,new_sms.shape)
+
+# LINEAR REGRESSION
+
+from sklearn.linear_model import LinearRegression
+
+regressor = LinearRegression()
+regressor.fit(X_train,y_train)
+y_pred = regressor.predict(X_valid)
+intercept= regressor.intercept_
+coeff= regressor.coef_
+#Null hypothesis so the base line
+from sklearn.metrics import mean_squared_error,mean_absolute_error
+r_sq = regressor.score(X_valid,y_valid)
+print("Coefficients:")
+print(coeff)
+print("R^2:")
+print(r_sq)
+print(mean_squared_error(y_valid, y_pred,squared=False))
+print(mean_absolute_error(y_valid, y_pred))
+
