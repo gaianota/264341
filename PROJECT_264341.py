@@ -24,5 +24,3 @@ sns.heatmap(data=corr, square=True, annot=True, cbar=True)
 for col in X.columns:
   sns.scatterplot(data=sms,x=col,y='shares')
   plt.show()
-
-
