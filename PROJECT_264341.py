@@ -111,30 +111,31 @@ print(mean_absolute_error(y_valid, y_pred))
 #esplor the parameters to find the best combination
 #Cross validation for Random Forest
 from sklearn.model_selection import cross_val_score, GridSearchCV
-grid ={'max_depth': range(3, 7),'n_estimators': (10, 50, 100)}
+grid ={'max_depth': range(4, 6),'n_estimators': (10, 50, 100)}
 rfr_grid = GridSearchCV(regressor,grid,cv=10, scoring='neg_mean_squared_error', verbose=0, n_jobs=-1)
 rfr_grid_result = rfr_grid.fit(X_train, y_train)
-rfr_best_params = rfr_grid_result.best_params_
-rfr = RandomForestRegressor(criterion=best_params['criterion'],max_features = best_params['max_features'],max_depth=best_params["max_depth"], n_estimators=best_params["n_estimators"],random_state=False, verbose=False)
-# Perform K-Fold CV
-scores = cross_val_score(rfr, X_train, y_train, cv=10, scoring='neg_mean_absolute_error')
-print(scores)
-
+#Perform K-Fold CV
 def best_scores_grid_search_df(reg):
     reg.cv_results_
     grid_table = pd.DataFrame(reg.cv_results_)
     colums_wanted = ['params', 'mean_test_score', 'std_test_score', 'rank_test_score']
     grid_table_rank = grid_table[colums_wanted].sort_values(by='rank_test_score', ascending=True)
     return grid_table_rank
+
+param_grid_rfr ={'max_depth': range(4, 6),'n_estimators': (10, 50, 100)}
+rfr_grid = GridSearchCV(regressor,param_grid_rfr,cv=10, scoring='neg_mean_squared_error', verbose=0, n_jobs=-1)
+rfr_grid_result = rfr_grid.fit(X_train, y_train)
 RF_best_scores= best_scores_grid_search_df(rfr_grid)
 print(RF_best_scores)
+rfr_best_params = rfr_grid_result.best_params_
+rfr = RandomForestRegressor(max_depth=best_params["max_depth"], n_estimators=best_params["n_estimators"],random_state=False, verbose=False)
 
 from sklearn.linear_model import LinearRegression
 ## SVR
 #First we find the best combination of hyperparameters
 from sklearn.svm import SVR
-param_grid = {'kernel': ['linear', 'poly', 'rbf', 'sigmoid'], 'C': [np.power (10., a) for a in range(-1,4)]}
-reg_svr = GridSearchCV(svr, param_grid, cv=10)
-reg_svr.fit(X_train,y_train)
-SVM_best_scores=best_scores_grid_search_df(reg_svr).head()
+param_grid_svr = {'kernel': ['linear', 'poly', 'rbf', 'sigmoid'], 'C': [np.power (10., a) for a in range(-1,4)]}
+reg_svr = GridSearchCV(svr, param_grid_svr, cv=10,scoring='neg_mean_squared_error')
+reg_svr.fit(X_train, y_train)
+SVM_best_scores = best_scores_grid_search_df(reg_svr).head()
 print(SVM_best_scores)
