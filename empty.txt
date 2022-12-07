@@ -21,8 +21,8 @@ print(new_sms.info())
 X = new_sms.iloc[:,:-1]
 y = new_sms.iloc[:,-1]
 
-
 print('New:' ,new_sms.shape)
+
 
 # LINEAR REGRESSION
 
@@ -40,6 +40,18 @@ print("Coefficients:")
 print(coeff)
 print("R^2:")
 print(r_sq)
+print(mean_squared_error(y_valid, y_pred,squared=False))
+print(mean_absolute_error(y_valid, y_pred))
+
+#WE START WITH DECISION TREE
+from sklearn.tree import DecisionTreeRegressor
+clf_DT= DecisionTreeRegressor(
+    criterion = 'squared_error',#“squared_error”, “friedman_mse”, “absolute_error”, “poisson”
+    splitter = 'best'#best,random
+)
+clf_DT.fit(X_train,y_train)
+y_pred = clf_DT.predict(X_valid)
+
 print(mean_squared_error(y_valid, y_pred,squared=False))
 print(mean_absolute_error(y_valid, y_pred))
 
