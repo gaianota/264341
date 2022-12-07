@@ -88,6 +88,7 @@ X_test = pipeline.transform(X_test)
 #Then use 10-fold cross-validation to find the best set of hyperparameters.
 #You must describe every hyperparameter tuned (the more, the better).
 
+from sklearn.metrics import mean_squared_error,mean_absolute_error
 # Fitting Random Forest Regression to the dataset
 # import the regressor
 from sklearn.ensemble import RandomForestRegressor
@@ -109,8 +110,8 @@ print(mean_absolute_error(y_valid, y_pred))
 #GRID SEARCH with cross validation
 #esplor the parameters to find the best combination
 #Cross validation for Random Forest
-from sklearn.model_selection import cross_val_score, GridSearchC
-grid ={'criterion':['squared_error','absolute_error','poisson'],'max_features':['sqrt','log2', None], 'max_depth': range(3, 7),'n_estimators': (10, 50, 100, 1000)}
+from sklearn.model_selection import cross_val_score, GridSearchCV
+grid ={'max_depth': range(3, 7),'n_estimators': (10, 50, 100)}
 rfr_grid = GridSearchCV(regressor,grid,cv=10, scoring='neg_mean_squared_error', verbose=0, n_jobs=-1)
 rfr_grid_result = rfr_grid.fit(X_train, y_train)
 rfr_best_params = rfr_grid_result.best_params_
@@ -128,3 +129,12 @@ def best_scores_grid_search_df(reg):
 RF_best_scores= best_scores_grid_search_df(rfr_grid)
 print(RF_best_scores)
 
+from sklearn.linear_model import LinearRegression
+## SVR
+#First we find the best combination of hyperparameters
+from sklearn.svm import SVR
+param_grid = {'kernel': ['linear', 'poly', 'rbf', 'sigmoid'], 'C': [np.power (10., a) for a in range(-1,4)]}
+reg_svr = GridSearchCV(svr, param_grid, cv=10)
+reg_svr.fit(X_train,y_train)
+SVM_best_scores=best_scores_grid_search_df(reg_svr).head()
+print(SVM_best_scores)
