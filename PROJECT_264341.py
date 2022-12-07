@@ -9,7 +9,8 @@ sms = pd.read_csv('social_media_shares.csv')
 #Divide data in dependent and independent
 X = sms.iloc[:,:-1]
 y = sms.iloc[:,-1]
-#Visualizing the dataset info
+#We proceed with a Explanatory data analysis (EDA) with visualization.
+
 print(sms.describe())
 print(sms.head())
 print(sms.info())
@@ -24,7 +25,7 @@ sns.heatmap(data=corr, square=True, annot=True, cbar=True)
 for col in X.columns:
   sns.scatterplot(data=sms,x=col,y='shares')
   plt.show()
-
+#We can see that there is no linear correlation between the regressor and response variables!
 
 for columns correlation
   upper_tri = corr.where(np.triu(np.ones(corr.shape), k=1).astype(np.bool_))
