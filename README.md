@@ -29,7 +29,7 @@ For example, the best hyperparameter for Polynomial Regression is degree 2.
 
 RESULTS
 
-We computed mean squared error and mean absolute error for the three models we chose. Here there are the results:
+We computed mean squared error and mean absolute error for the three models we chose. Here there are the results (for a table visualization of the following error scores, please see the image named "Error_table.jpeg" in the "images" folder):
 
 SVR -> mean square error is: 11013.363209211355; mean absolute error is: 2427.9992616525187
 Random Forest -> mean square error is: 10739.47526604121; mean absolute error is: 3053.8303148987284
