@@ -1,4 +1,4 @@
-SOCIAL MEDIA SHARES
+SOCIAL MEDIA SHARES PROJECT
 by Nota Gaia (264341, captain), Dospinescu Sara (26851), Giannandrea Giulia (269321)
 
 INTRODUCTION
