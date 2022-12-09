@@ -1,14 +1,14 @@
-SOCIAL MEDIA SHARES PROJECT
+**SOCIAL MEDIA SHARES** 
 by Nota Gaia (264341, captain), Dospinescu Sara (26851), Giannandrea Giulia (269321)
 
-INTRODUCTION
+**INTRODUCTION**
 
 What is the best artificial intelligence model, in terms of accuracy and efficiency, to predict the number of social media shares of a company based on contents and supposed publication time? 
 This is the question we tried to answer to,  for our project. 
 We found ourselves hired by a company to help the social media department analyse its communications’ success, having as knowledge and skills the ones learnt during AI and Machine Learning lectures and having as dataset the one provided by the company itself.
 Our dataset stores data about features(such as words, links, videos, images); keywords; topics; some variables; also stores information about the contents' sentiment analysis (for instance about subjectivity, polarity, rates of positive and negative words in the content); popularity of the content; time of publication (day of the week in particular).
 
-METHODS
+**METHODS**
 
 After importing the needed libraries and the dataset, we isolated the shares' variable column, since it is the dependent variable, so the value we want to predict. 
 We proceeded with an explanatory data analysis through visualizations (one by one independent variable on x-axis and always shares' variable on y-axis). 
@@ -20,7 +20,7 @@ Right after we divided the dataset in train and test sets, choosing as split siz
 The next step was scaling data: we tried different ways to scale our data. 
 Initially we tried robust scalar; then our manual implementation for the outliers' removal with standard scalar; we also implemented from scratch a piece of code to remove outliers with robust scalar; in the end we tried both robust scalar and standard scalar together. Only after all these experiments, we understood that robust scalar was the most efficient way to scale our data, having as advantage the automatic outliers' deletion.
 
-EXPERIMENTAL DESIGN
+**EXPERIMENTAL DESIGN**
 
 Initially, we took in consideration all the regression models we knew and analyzed theoretically all of them, one by one, to choose which ones to implement.
 We immediately discarded K-NN because it works better on small datasets and this was not our case; we doubted CART TREES because we thought that, in order to effectively and accurately analyze our dataset, we would need a more complex structure than a simple tree. 
@@ -32,7 +32,7 @@ To evaluate our models' performance, we chose to calculate the mean squared erro
 Additionally, to make sure that every model is evaluated at its best, so at its lowest error score, we used CrossValidation to calculate the best combination of hyperparameters of each of the models we implemented. 
 For example, the best hyperparameter for Polynomial Regression is degree 2.
 
-RESULTS
+**RESULTS**
 
 We computed mean squared error and mean absolute error for the three models we chose. Here there are the results (for a table visualization of the following error scores, please see the image named "Error_table.jpeg" in the "images" folder):
 
@@ -46,7 +46,7 @@ Between SVR and Random Forest, for us, the best one is SVR. Even though the mean
 Once we found out which is the best model, we validate it. We restrict the set of independent variables at just the most relevant ones and on these we run again SVR. 
 We evaluate the output and see that the mean square error is  10978.618879950773, the mean absolute error is  2409.3500586094356. We see that, selecting the most relevant columns, the model actually works better. 
 
-CONCLUSIONS
+**CONCLUSIONS**
 
 During the project, we realized how important it is, when trying to predict something thanks to AI models, to study the data in the best way possible in order to understand the most what is the kind of information you have and what you want to obtain from the model. 
 The main obstacle was really feel the meaning and the value of each single variable and learn how to handle this large amount of data. 
@@ -61,11 +61,11 @@ To conclude, one thing that could have been improved in our project was the poss
 By the way it was not possible for us because of computational limits. 
 In fact, we wanted at first to try out Polynomial Regression from degree=2 to degree=7 but already at degree=2 and degree=3 it took too much time, unfortunately.
 
-HOW WE WORKED
+**HOW WE WORKED**
 
 Our group always managed to work together, meeting up online or, when possible, face to face. 
 We found it easier to work on just one screen to avoid changes overlap, as a consequence, the contribution on github does not respect the actual contribution of the group members, which was balanced and proficuous.
 We really enjoyed sharing, building and growing line by line together this project, that was for us challenging but inspiring. 
 This experience positively boosted our team working and problem-solving skills.
 
--Gaia, Sara, Giulia
+**-Gaia, Sara, Giulia**
