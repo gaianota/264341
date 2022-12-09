@@ -46,3 +46,10 @@ During the project, we realized how important it is, when trying to predict some
 We expected and definitely wanted very low error scores, we desired them to be at least as the ones of the lab sessions! They were not. Then we realized that the dataset size was way larger (order of thousands) and that the structure was way more complex, so it was reasonable to have higher error scores. From that realization, we started loking at error scores as percentages of the total amount of data, not as a single number.
 Also, we appreciated the contribution of using CrossValidation, in fact, we saw how much it can be a game changer to know and use the best hyperparameters for each model. 
 
+To conclude, one thing that could have been improved in our project was the possibility to do more CrossValidations, to try out more combinations of hyperparameters. By the way it was not possible for us because of computational limits. In fact, we wanted at first to try out Polynomial Regression from degree=2 to degree=7 but already at degree=2 and degree=3 it took too much time, unfortunately.
+
+HOW WE WORKED
+
+Our group always managed to work together, meeting up online or, when possible, face to face. 
+We found it easier to work on just one screen to avoid changes overlap, as a consequence, the contributions on github do not respect the actual contribution of the group members, which was balanced and proficuous.
+We really enjoyed sharing, building and growing line by line together this project, that was for us challenging but inspiring. This experience really boosted our team working and problem solving skills.
