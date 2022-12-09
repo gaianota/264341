@@ -52,4 +52,6 @@ HOW WE WORKED
 
 Our group always managed to work together, meeting up online or, when possible, face to face. 
 We found it easier to work on just one screen to avoid changes overlap, as a consequence, the contributions on github do not respect the actual contribution of the group members, which was balanced and proficuous.
-We really enjoyed sharing, building and growing line by line together this project, that was for us challenging but inspiring. This experience really boosted our team working and problem solving skills.
+We really enjoyed sharing, building and growing line by line together this project, that was for us challenging but inspiring. 
+This experience really boosted our team working and problem solving skills.
+Gaia, Sara, Giulia
